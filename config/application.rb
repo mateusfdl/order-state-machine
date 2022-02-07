@@ -1,6 +1,6 @@
-require_relative "boot"
+require_relative 'boot'
 
-require "rails/all"
+require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -9,6 +9,8 @@ Bundler.require(*Rails.groups)
 module OrderStateMachine
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
+    config.add_autoload_paths_to_load_path = false
+    config.autoload_paths << "#{config.root}/lib"
     config.load_defaults 7.0
 
     # Configuration for the application, engines, and railties goes here.
