@@ -1,53 +1,71 @@
-<h1> Orders </h1>
-
-<%= button_to 'Clear filters', '/orders', method: 'get' %>
-<%= form_with url: orders_path, method: 'get', local: true do |form| %>
-  <%=
-    form.select :status, [
-      ["Pending", "pending"],
-      ["In Progress", "in_progress"],
-      ["Completed", "completed"]
-    ]
-  %>
-  <%= form.submit "Filter" %>
-<% end %>
-<%= form_with url: orders_path, method: 'get', local: true do |form| %>
-  <%= form.text_field 'control_number' %>
-  <%= form.submit 'Find' %>
-<% end %>
-
-
-<table class="table table-dark">
-  <tr>
-    <th> Id </th>
-    <th> Control number </th>
-    <th> State </th>
-    <th> Action </th>
-  </tr>
-
+<table class="table table-borderless">
+ <thead>
+    <tr>
+      <th> Id </th>
+      <th> Control number </th>
+      <th> State </th>
+      <th> Action </th>
+    </tr>
+  </thead>
+  <tbody>
   <% @orders.each do |order| %>
     <tr>
       <td> <%= order.id[...4] %> </td>
       <td> <%= order.control_number %> </td>
       <td> <%= order.status %> </td>
       <td>
-        <%=
-          button = case order.status
-            when 'pending'
-              button_to 'Start',
-                        order_start_progress_path(order.id),
-                        method: :get
-            when 'in_progress'
-              button_to 'Complete',
-                        order_complete_path(order.id),
-                        method: :get
-            else
-              button_to 'Order completed!', {}, disabled: true
-            end
-          %>
+          <%=
+            button = case order.status
+              when 'pending'
+                button_to 'Start',
+                          order_start_progress_path(order.id),
+                          method: :get,
+                          class: 'btn btn-success'
+              when 'in_progress'
+                button_to 'Complete',
+                          order_complete_path(order.id),
+                          method: :get,
+                          class: 'btn btn-success'
+              else
+                button_to 'Order completed!',
+                          {}, 
+                          disabled: true, class: 'btn btn-secondary'
+              end
+            %>
       </td>
     </tr>
   <% end %>
+  </tbody>
 </table>'
 
-<%= button_to 'Add order', new_order_path, method: 'get' %>
+
+<div style="margin: auto;width: 50%;padding: 10px;">
+  <%= form_with url: orders_path, method: 'get', local: true do |form| %>
+    <div class="card">
+      <div class="card-body">
+
+        <div class="mb-3">
+          <%= form.text_field 'control_number', { class: "form-control", placeholder: "Control Number" } %>
+        </div>
+
+        <div class="mb-3">
+          <%=
+            form.select :status, [
+              ["Pending", "pending"],
+              ["In Progress", "in_progress"],
+              ["Completed", "completed"]
+            ], {}, { class: 'form-control' }
+          %>
+        </div>
+
+        <div class="btn-group " role="group">
+          <%= form.submit "Submit filters", class: "btn btn-primary" %>
+          <%= button_to 'Clear filters', orders_path, method: 'get', class: 'btn btn-secondary' %>
+          <%= button_to 'Add order', new_order_path, method: 'get', class: 'btn btn-success' %>
+        </div>
+
+      </div>
+    </div>
+  <% end %>
+</div>
+
