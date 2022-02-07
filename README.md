@@ -1,24 +1,23 @@
-# README
+## Getting started
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+1 - Install docker: [Docker Install Docs](https://docs.docker.com/install/)
 
-Things you may want to cover:
+2 - Clone this project
 
-* Ruby version
+3 - Go to the project folder
 
-* System dependencies
+4 - Build a Docker image, so you don't have to rebuild-it every time: `docker-compose build`
 
-* Configuration
+5 - Run the application database and server: `docker-compose up -d`
 
-* Database creation
+6 - Setup the database: `docker-compose exec server rails db:create db:migrate`
 
-* Database initialization
+7 - To run suit test just `docker-compose exec server rspec spec/`
 
-* How to run the test suite
+8 - To import data [localhost:3000/](http://localhost:3000/orders)
 
-* Services (job queues, cache servers, search engines, etc.)
+9 - have fun 😄!
 
-* Deployment instructions
+## Stopping Application
 
-* ...
+1 - Just run `docker-compose down && sudo rm -Rf tmp/`
