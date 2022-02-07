@@ -14,7 +14,7 @@
 
 7 - To run suit test just `docker-compose exec server rspec spec/`
 
-8 - To import data [localhost:3000/](http://localhost:3000/orders)
+8 - To create orders and transact state machine [localhost:3000/orders](http://localhost:3000/orders)
 
 9 - have fun 😄!
 
