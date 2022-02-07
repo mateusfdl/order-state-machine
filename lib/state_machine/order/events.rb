@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module StateMachine
   module Order
     module Events

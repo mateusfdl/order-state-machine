@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OrdersController < ApplicationController
   attr_reader :order
 
@@ -35,13 +37,13 @@ class OrdersController < ApplicationController
   end
 
   def orders_by_control_number
-    return unless control_number_params
+    return if control_number_params.blank?
 
     @orders = @orders.by_control_number(control_number_params)
   end
 
   def orders_by_status
-    return unless status_params
+    return if status_params.blank?
 
     @orders = @orders.by_status(status_params)
   end
