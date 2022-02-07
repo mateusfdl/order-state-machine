@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
+  resources :orders do
+    get 'start_progress', to: 'orders#start_progress'
+    get 'complete', to: 'orders#complete'
+  end
 end
